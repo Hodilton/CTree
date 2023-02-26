@@ -10,11 +10,16 @@ int main()
 
 	CTree<CData> tree;
 
-	for (size_t i = 0; i < 20; i++) {
-		CData data(i + 10, CRandom<int>::Get());
+	for (size_t i = 0; i < 5; i++) {
+		CData data(i + 10, i);
 		tree.AddNode(data);
-	}	
+	}
 
+	tree.PrintGoDown();
+	cout << endl;
+
+	CData data(12, 2);
+	tree.DeleteNode(data);
 	tree.PrintGoDown();
 
 	return 0;

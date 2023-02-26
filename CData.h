@@ -17,11 +17,15 @@ public:
 	}
 
 	bool operator<(const CData& another) const {
-		return value < another.value&& ch < another.ch;
+		return value < another.value && ch < another.ch;
 	}
 
 	bool operator>(const CData& another) const {
-		return ! (*this < another);
+		return value > another.value && ch > another.ch;
+	}
+
+	bool operator==(const CData& another) const {
+		return value == another.value && ch == another.ch;
 	}
 
 	friend istream& operator>>(istream& in, CData& another) {

@@ -28,6 +28,37 @@ void CTree<T>::AddNode(CNode<T>** root, const T& data)
 }
 
 template<typename T>
+void CTree<T>::DeleteNode(CNode<T>** root, const T& data)
+{
+    if (*root == nullptr) return;
+
+    if (data < (*root)->data) {
+        DeleteNode(&(*root)->left, data);
+    }
+    else if (data > (*root)->data) {
+        DeleteNode(&(*root)->right, data);
+    }
+    else if (data == (*root)->data) {
+        if ((*root)->left == nullptr) {
+            CNode<CData>* temp = *root;
+            *root = (*root)->right;
+            delete temp;
+        }
+        else if ((*root)->right == nullptr) {
+            CNode<CData>* temp = *root;
+            *root = (*root)->left;
+            delete temp;
+        }
+        else // Есть оба потомка
+        {
+            CNode<CData>* temp = FindMin((*root)->right); // Находим минимальный элемент в правом поддереве
+            (*root)->data = temp->data; // Копируем значение в удаляемый узел
+            DeleteNode(&(*root)->right, temp->data); // Удаляем найденный узел
+        }
+    }
+}
+
+template<typename T>
 void CTree<T>::PrintGoDown(CNode<T>* root)
 {
     if (root)
@@ -67,6 +98,15 @@ void CTree<T>::FreeMemory(CNode<T>** root)
 }
 
 template<typename T>
+CNode<T>* CTree<T>::FindMin(CNode<T>* data)
+{
+    while (data->left != nullptr) {
+        data = data->left;
+    }
+    return data;
+}
+
+template<typename T>
 CTree<T>::~CTree()
 {
     this->FreeMemory(&_root);
@@ -76,6 +116,12 @@ template<typename T>
 void CTree<T>::AddNode(const T& data)
 {
     this->AddNode(&_root, data);
+}
+
+template<typename T>
+void CTree<T>::DeleteNode(const T& data)
+{
+    this->DeleteNode(&_root, data);
 }
 
 template<typename T>
