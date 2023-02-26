@@ -4,34 +4,35 @@
 #include "stdafx.h"
 
 template <typename T>
-struct Node {
+class CNode {
+public:
     T data;
-    Node* left;
-    Node* right;
+    CNode* left;
+    CNode* right;
 
-    Node() : left(nullptr), right(nullptr) {}
-    Node(const T& data) : data(data), left(nullptr), right(nullptr) {}
+    CNode() : left(nullptr), right(nullptr) {}
+    CNode(const T& data) : data(data), left(nullptr), right(nullptr) {}
 };
 
 template <typename T>
 class CTree {
 private:
-    Node<T>* _root;
+    CNode<T>* _root;
 
     CTree(const CTree&) = delete;
     CTree& operator=(const CTree&) = delete;
 
-    Node<T>* CreateRoot(const T& value);
-    void AddNode(Node<T>** root, const T& value);
-    void PrintGoDown(Node<T>* root);
-    void Print(Node<T>* root, const size_t& level);
-    void FreeMemory(Node<T>** root);
+    CNode<T>* CreateRoot(const T& data);
+    void AddNode(CNode<T>** root, const T& data);
+    void PrintGoDown(CNode<T>* root);
+    void Print(CNode<T>* root, const size_t& level);
+    void FreeMemory(CNode<T>** root);
 
 public:
     CTree() : _root(nullptr) {}
     ~CTree();
 
-    void AddNode(const T& value);
+    void AddNode(const T& data);
     void PrintGoDown();
     void Print();
 };

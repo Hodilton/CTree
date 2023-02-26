@@ -132,6 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CConsole.h" />
+    <ClInclude Include="CData.h" />
     <ClInclude Include="CRandom.h" />
     <ClInclude Include="CTree.h" />
     <ClInclude Include="stdafx.h" />

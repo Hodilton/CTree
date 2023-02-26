@@ -3,32 +3,32 @@
 #include "CTree.h"
 
 template <typename T>
-Node<T>* CTree<T>::CreateRoot(const T& value) 
+CNode<T>* CTree<T>::CreateRoot(const T& data)
 {
-    Node<T>* p = new Node<T>(value);
+    CNode<T>* p = new CNode<T>(data);
     return p;
 }
 
 template<typename T>
-void CTree<T>::AddNode(Node<T>** root, const T& value) 
+void CTree<T>::AddNode(CNode<T>** root, const T& data)
 {
-    if (!*root) *root = CreateRoot(value);
+    if (!*root) *root = CreateRoot(data);
     else
     {
-        if (value < (*root)->data) {
-            if (!(*root)->left) (*root)->left = CreateRoot(value);
-            else AddNode(&(*root)->left, value);
+        if (data < (*root)->data) {
+            if (!(*root)->left) (*root)->left = CreateRoot(data);
+            else AddNode(&(*root)->left, data);
         }
 
-        if (value > (*root)->data) {
-            if (!(*root)->right) (*root)->right = CreateRoot(value);
-            else AddNode(&(*root)->right, value);
+        if (data > (*root)->data) {
+            if (!(*root)->right) (*root)->right = CreateRoot(data);
+            else AddNode(&(*root)->right, data);
         }
     }
 }
 
 template<typename T>
-void CTree<T>::PrintGoDown(Node<T>* root)
+void CTree<T>::PrintGoDown(CNode<T>* root)
 {
     if (root)
     {
@@ -39,7 +39,7 @@ void CTree<T>::PrintGoDown(Node<T>* root)
 }
 
 template<typename T>
-void CTree<T>::Print(Node<T>* root, const size_t& level)
+void CTree<T>::Print(CNode<T>* root, const size_t& level)
 {
     if (!root) return;
 
@@ -54,7 +54,7 @@ void CTree<T>::Print(Node<T>* root, const size_t& level)
 }
 
 template<typename T>
-void CTree<T>::FreeMemory(Node<T>** root)
+void CTree<T>::FreeMemory(CNode<T>** root)
 {
     if (*root)
     {
@@ -73,9 +73,9 @@ CTree<T>::~CTree()
 }
 
 template<typename T>
-void CTree<T>::AddNode(const T& value)
+void CTree<T>::AddNode(const T& data)
 {
-    this->AddNode(&_root, value);
+    this->AddNode(&_root, data);
 }
 
 template<typename T>
